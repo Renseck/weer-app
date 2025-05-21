@@ -1,0 +1,40 @@
+.search-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 20px;
+}
+
+.search-input-wrapper {
+  display: flex;
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background: white;
+  width: 100%;
+}
+
+.search-button {
+  background: #4ad6ed;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background: #30c1d8;
+}
+
+.search-button svg {
+  display: block;
+}

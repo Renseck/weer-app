@@ -1,0 +1,14 @@
+<div class="weather-widget">
+    <div class="icon-section">
+        <img 
+            src="assets/compass.svg" 
+            alt="Windrichting kompas" 
+            class="weather-icon compass-icon"
+            [style.--wind-angle]="(windDirectionDegrees - 45) + 'deg'"
+        >
+    </div>
+    <div class="data-section">
+        <h3 class="weather-value">{{ cardinalDirection }}</h3>
+        <span class="icon-label">Windrichting</span>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="weather-widget">
+    <div class="icon-section">
+        <svg viewBox="0 0 100 100" width="70" height="70" class="weather-icon rain-icon">
+            <!-- Define gradients -->
+            <defs>
+                <linearGradient id="rain-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#4ad6ed" />
+                    <stop offset="100%" stop-color="#2196F3" />
+                </linearGradient>
+                <linearGradient id="rain-gradient-heavy" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#2196F3" />
+                    <stop offset="100%" stop-color="#1976D2" />
+                </linearGradient>
+            </defs>
+            
+            <!-- Much pointier Raindrop path -->
+            <path class="raindrop-outline" d="M50,1 c-10,0 -30,40 -30,60 c0,19.33 13.43,35 30,35 c16.57,0 30,-15.67 30,-35 c0,-20 -20,-60 -30,-60 z" />
+            
+            <!-- Raindrop fill - will be clipped based on rain amount -->
+            <clipPath id="rain-clip">
+                <rect 
+                    [attr.x]="0" 
+                    [attr.y]="95 - (rainPercentage * 94)" 
+                    [attr.width]="100" 
+                    [attr.height]="rainPercentage * 94"
+                ></rect>
+            </clipPath>
+            
+            <path 
+                class="raindrop-fill" 
+                clip-path="url(#rain-clip)"
+                d="M50,1 c-10,0 -30,40 -30,60 c0,19.33 13.43,35 30,35 c16.57,0 30,-15.67 30,-35 c0,-20 -20,-60 -30,-60 z" 
+            />
+        </svg>
+    </div>
+    <div class="data-section">
+        <h3 class="weather-value">{{ displayValue }}</h3>
+        <span class="icon-label">Regen laatste uur</span>
+    </div>
+</div>

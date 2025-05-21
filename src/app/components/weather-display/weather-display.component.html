@@ -1,0 +1,38 @@
+<div class="weather-container">
+  <app-search-bar (search)="onCitySearch($event)"></app-search-bar>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <div class="spinner"></div>
+    <p>Weerdata ophalen...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div class="weather-grid" [class.faded]="isLoading">
+      <div class="weather-item">
+        <app-actual-temp-icon [actualTemperature]="actualTemp"></app-actual-temp-icon>
+      </div>
+
+      <div class="weather-item">
+        <app-perceived-temp-icon [feelTemperature]="feelTemp"></app-perceived-temp-icon>
+      </div>
+
+      <div class="weather-item">
+        <app-ground-temp-icon [groundTemperature]="groundTemp"></app-ground-temp-icon>
+      </div>
+
+      <div class="weather-item">
+        <app-sun-icon [solarPower]="solarPower"></app-sun-icon>
+      </div>
+
+      <div class="weather-item">
+        <app-rain-icon [rainValue]="rainValue"></app-rain-icon>
+      </div>
+
+      <div class="weather-item">
+        <app-wind-compass-icon [windDirectionDegrees]="windDirectionDegrees"></app-wind-compass-icon>
+      </div>
+  </div>
+</div>

@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+.weather-widget {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    gap: 10px;
+    width: 300px;
+    height: 80px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.icon-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+}
+
+.weather-icon {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.data-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: calc(100% - 80px);
+    height: 100%;
+    align-items: flex-end;
+    padding: 2px 0;
+}
+
+.weather-value {
+    font-size: 50px !important;
+    font-weight: bold;
+    color: #4ad6ed;
+    margin: 0;
+    line-height: 1;
+    text-align: right;
+    padding-bottom: 10px;
+}
+
+.icon-label {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1;
+    text-align: right;
+}

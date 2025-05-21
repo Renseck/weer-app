@@ -1,0 +1,22 @@
+.rain-icon {
+    overflow: visible;
+}
+
+.raindrop-outline {
+    fill: none;
+    stroke: #000;
+    stroke-width: 3;
+}
+
+.raindrop-fill {
+    fill: url(#rain-gradient);
+}
+
+:host([high-rainfall="true"]) .raindrop-outline {
+    stroke: var(--error) !important;
+    stroke-width: 4;
+}
+
+:host([high-rainfall="true"]) .raindrop-fill {
+    fill: url(#rain-gradient-heavy);
+}
