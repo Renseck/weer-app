@@ -1,8 +1,8 @@
 {
-    "actualTemp": 18.7,
-    "feelTemp": 17.2,
-    "groundTemp": 15.3,
-    "solarPower": 1430,
-    "rainValue": 45,
-    "windDirectionDegrees": 225
+    "temperature": 18.7,
+    "feelTemperature": 17.2,
+    "groundTemperature": 15.3,
+    "sunPower": 1430,
+    "rainfallLastHour": 45,
+    "windDirectionDegrees": 325
 }

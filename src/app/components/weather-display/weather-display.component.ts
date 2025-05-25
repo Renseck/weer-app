@@ -8,6 +8,7 @@ import { RainIconComponent } from '../icons/rain-icon/rain-icon.component';
 import { SunIconComponent } from '../icons/sun-icon/sun-icon.component';
 import { WindCompassIconComponent } from '../icons/wind-compass-icon/wind-compass-icon.component';
 import { WeatherDataService } from '../../services/WeatherDataJson/weather-data.service';
+import { ApiService } from '../../services/APIConnection/api.service';
 
 @Component({
   selector: 'app-weather',
@@ -35,7 +36,9 @@ export class WeatherComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
-  constructor(private weatherService: WeatherDataService) {}
+  constructor(
+    private weatherService: WeatherDataService,
+    private apiService: ApiService) {}
 
   ngOnInit(): void {
       this.loadWeatherData();
@@ -44,22 +47,22 @@ export class WeatherComponent implements OnInit {
   loadWeatherData() {
     this.isLoading = true;
     
-    this.weatherService.getWeatherData().subscribe({
+    this.weatherService.getData().subscribe({
       next: (data) => {
         // Simulate loading delay to see the effect
         setTimeout(() => {
-          this.actualTemp = data.actualTemp;
-          this.feelTemp = data.feelTemp;
-          this.groundTemp = data.groundTemp;
-          this.solarPower = data.solarPower;
-          this.rainValue = data.rainValue;
+          this.actualTemp = data.temperature;
+          this.feelTemp = data.feelTemperature;
+          this.groundTemp = data.groundTemperature;
+          this.solarPower = data.sunPower;
+          this.rainValue = data.rainfallLastHour;
           this.windDirectionDegrees = data.windDirectionDegrees;
           this.isLoading = false;
         }, 1000);
       },
       error: (err) => {
-        console.error('Error loading weather data:', err);
-        this.errorMessage = 'Failed to load weather data';
+        console.error('Error loading weather data from API:', err);
+        this.errorMessage = 'Failed to load weather data from API';
         this.isLoading = false;
       }
     });

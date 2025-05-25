@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface WeatherData {
-  actualTemp: number;
-  feelTemp: number;
-  groundTemp: number;
-  solarPower: number;
-  rainValue: number;
+  temperature: number;
+  feelTemperature: number;
+  groundTemperature: number;
+  sunPower: number;
+  rainfallLastHour: number;
   windDirectionDegrees: number;
 }
 
@@ -17,7 +17,7 @@ export interface WeatherData {
 export class WeatherDataService {
   constructor(private http: HttpClient) { }
 
-  getWeatherData(): Observable<WeatherData> {
+  getData(): Observable<WeatherData> {
     return this.http.get<WeatherData>('assets/weather-data.json');
   }
 }
