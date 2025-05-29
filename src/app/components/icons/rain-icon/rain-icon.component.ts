@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { LoggingConfig } from '../../../config/logging-config';
 @Component({
   selector: 'app-rain-icon',
   standalone: true,
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RainIconComponent implements OnChanges, OnDestroy {
   @Input() rainValue: number = 3; // in mm
-  maxRainAmount: number = 50;
+  maxRainAmount: number = 10;
 
   rainPercentage: number = 0;
   displayValue: string = '0mm';
@@ -28,8 +28,12 @@ export class RainIconComponent implements OnChanges, OnDestroy {
   /* ============================================================================================ */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['rainValue']) 
+      if (LoggingConfig.iconLogging)
+      {
+        console.log("New rain value: ", this.rainValue);
+      }
       this.updateRainDisplay();
-      console.log("New rain value: ", this.rainValue);
+      
   }
 
   /* ============================================================================================ */

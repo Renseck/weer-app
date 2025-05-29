@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --ewblue: #4ad6ed;
+    --ewyellow: #ffed00;
+    --error: #ff5252;
+}
+
 .weather-widget {
     display: flex;
     align-items: center;
@@ -38,7 +44,7 @@
 .weather-value {
     font-size: 50px !important;
     font-weight: bold;
-    color: #4ad6ed;
+    color: var(--ewblue);
     margin: 0;
     line-height: 1;
     text-align: right;
@@ -51,4 +57,36 @@
     margin: 0;
     line-height: 1;
     text-align: right;
+}
+
+.error-message {
+  color: var(--error);
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(255, 82, 82, 0.1);
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  height: 60px;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(74, 214, 237, 0.2);
+  border-left-color: var(--ewblue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.faded {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-
+import { LoggingConfig } from '../../../config/logging-config';
 @Component({
   selector: 'app-sun-icon',
   imports: [CommonModule],
@@ -31,12 +31,15 @@ export class SunIconComponent implements OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["solarPower"]) {
       this.updateSunColor();
-      console.log("New solar power value: ", this.solarPower);
 
       this.targetBrightness = Math.min(Math.max(this.solarPower / this.maxValue, 0), 1);
       this.animationSpeed = 0.02*this.targetBrightness;
       
       this.startBrightnessAnimation();
+      if (LoggingConfig.iconLogging)
+      {
+        console.log("New solar power value: ", this.solarPower);
+      }
     }
   }
 

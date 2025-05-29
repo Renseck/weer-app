@@ -1,0 +1,74 @@
+<div class="history-container">
+    <div class="history-header">
+        <h2>Weergeschiedenis voor {{ stationName }}</h2>
+        <button class="close-button" (click)="onCloseClick()">×</button>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-indicator">
+        <div class="spinner"></div>
+        <p>Historische data laden...</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage" class="charts-container">
+        <div class="chart-card">
+            <h3>Temperatuurtrends</h3>
+
+            <ngx-charts-line-chart
+                [view]="view"
+                [scheme]="temperatureColorScheme"
+                [results]="temperatureData"
+                [gradient]="true"
+                [xAxis]="xAxis"
+                [yAxis]="yAxis"
+                [legend]="legend"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                [timeline]="timeline"
+                [autoScale]="true">
+            </ngx-charts-line-chart>
+        </div>
+
+        <div class="chart-card">
+            <h3>Regen (mm)</h3>
+
+              <ngx-charts-area-chart
+                [view]="view"
+                [scheme]="rainfallColorScheme"
+                [results]="rainData"
+                [gradient]="true"
+                [xAxis]="xAxis"
+                [yAxis]="yAxis"
+                [legend]="false"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="'Regenval (mm)'"
+                [timeline]="timeline">
+            </ngx-charts-area-chart>
+        </div>
+
+        <div class="chart-card">
+            <h3>Zonnekracht (W/m²)</h3>
+
+            <ngx-charts-area-chart
+                [view]="view"
+                [scheme]="solarColorScheme"
+                [results]="sunData"
+                [gradient]="true"
+                [xAxis]="xAxis"
+                [yAxis]="yAxis"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="'Zonnekract (W/m²)'"
+                [timeline]="timeline">
+            </ngx-charts-area-chart>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+.floating-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 90%;
+  max-width: 500px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-left: 4px solid var(--ewblue);
+  animation: slide-down 0.5s ease;
+  opacity: 1;
+  transform: translateX(-50%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.floating-notification.hiding {
+    opacity: 0;
+    transform: translateY(-20px) translateX(-50%);
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-100%) translateX(-50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) translateX(-50%);
+    opacity: 1;
+  }
+}
+
+.notification-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.notification-icon {
+  color: var(--ewblue);
+  flex-shrink: 0;
+}
+
+.notification-text h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.notification-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.notification-close {
+  background: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.notification-close:hover {
+  color: #333;
+}
+
+/* ================================= Urgent / error notification ================================ */
+
+.notification-text p.urgent {
+    color: var(--error);
+    font-weight: 600;
+    margin-top: 6px;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.notification-text p.urgent::before {
+    content: "❗";
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.notification-text p.urgent::after {
+    content: "❗";
+    position: absolute;
+    right: 0;
+    top: 0;
+}

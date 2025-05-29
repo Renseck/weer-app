@@ -1,11 +1,32 @@
 <div class="weather-widget">
     <div class="icon-section">
-        <img 
-            src="assets/compass.svg" 
-            alt="Windrichting kompas" 
-            class="weather-icon compass-icon"
-            [style.--wind-angle]="(windDirectionDegrees - 45) + 'deg'"
-        >
+        <div class="compass-container">
+            <img 
+                src="assets/compass.svg" 
+                alt="Windrichting kompas" 
+                class="weather-icon compass-icon"
+                [style.--wind-angle]="(windDirectionDegrees - 45) + 'deg'"
+            >
+            <div class="info-icon" (mouseenter)="showTooltip = true" (mouseleave)="showTooltip = false">i</div>
+
+            <div class="tooltip" *ngIf="showTooltip">
+                <div class="tooltip-content">
+                    <div class="tooltip-row">
+                        <span class="tooltip-label">Windkracht:</span>
+                        <span class="tooltip-value">{{ beaufortScale }} Bft ({{ beaufortDescription }})</span>
+                    </div>
+                    <div class="tooltip-row">
+                        <span class="tooltip-label">Snelheid:</span>
+                        <span class="tooltip-value">{{ windSpeed*3.6 }} km/h</span>
+                    </div>
+                    <div class="tooltip-row">
+                        <span class="tooltip-label">Knopen:</span>
+                        <span class="tooltip-value">{{ knots }} kn</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
     <div class="data-section">
         <h3 class="weather-value">{{ cardinalDirection }}</h3>

@@ -1,0 +1,9 @@
+<div class="modal-backdrop" *ngIf="showModal" (click)="closeModal($event)">
+    <div class="modal-content">
+    <app-weather-history 
+        [stationId]="stationId" 
+        [stationName]="stationName"
+        (closeModal)="closeModal($event)">
+    </app-weather-history>
+    </div>
+</div>

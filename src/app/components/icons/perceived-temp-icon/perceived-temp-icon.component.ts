@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { LoggingConfig } from '../../../config/logging-config';
 @Component({
   selector: 'app-perceived-temp-icon',
   standalone: true,
@@ -12,13 +12,18 @@ export class PerceivedTempIconComponent implements OnChanges {
   @Input() feelTemperature: number = 0;
   displayValue = '0°';
   
+  /* ============================================================================================ */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['feelTemperature']) {
-      console.log('New feel temperature:', this.feelTemperature);
+      if (LoggingConfig.iconLogging)
+      {
+        console.log('New feel temperature:', this.feelTemperature);
+      }
       this.updateValue();
     }
   }
   
+  /* ============================================================================================ */
   private updateValue() {
     this.displayValue = `${this.feelTemperature.toFixed(1)}°`;
   }

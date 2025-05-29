@@ -1,0 +1,80 @@
+.weather-footer {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.timestamp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.timestamp svg {
+  color: var(--ewblue);
+}
+
+.refresh-button {
+  display:flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--ewblue);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.refresh-button svg {
+  transition: transform 0.5s ease;
+  transform-origin: center;
+}
+
+.refresh-button:hover svg {
+  animation: half-rotate 0.5s ease;
+  transform: rotate(180deg);
+}
+
+.refresh-button:hover {
+  background-color: color-mix(in srgb, var(--ewblue) 80%, black);
+}
+
+/* Use a full 360-degree rotation instead of going backward */
+.refresh-button:not(:hover):not(:disabled) svg:not(:root) {
+  transform: rotate(360deg);
+}
+
+/* Reset after transition completes */
+.refresh-button svg:not(:hover) {
+  transition: transform 0.5s ease, opacity 0.2s;
+}
+
+.refresh-button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.refresh-button:disabled svg {
+  animation: none;
+  transform: rotate(0);
+}
+
+.distance-indicator {
+  font-style: italic;
+  color: #888;
+}
+
+@keyframes half-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
