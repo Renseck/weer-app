@@ -154,3 +154,15 @@
     right: -30px;
   }
 }
+
+/* ========================================= Weather map ======================================== */
+.weather-map-section {
+  margin-top: 40px;
+}
+
+.map-header {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}

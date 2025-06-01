@@ -1,6 +1,6 @@
 export const LoggingConfig = {
   // Controls whether icon components log their value changes
-  iconLogging: true,
+  iconLogging: false,
   
   // Controls whether temperature calculations are logged
   tempCalculationLogging: false,

@@ -1,0 +1,12 @@
+<div class="map-container">
+    <div *ngIf="isLoading" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Data laden...</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
+
+    <div id="temperature-map"></div>
+</div>

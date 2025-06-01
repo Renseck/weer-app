@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, tap } from 'rxjs';
 import { MeteoService } from '../MeteoService/meteo.service';
-import { WeatherData } from '../WeatherDataJson/weather-data.service';
+import { StationData, WeatherData } from '../WeatherDataJson/weather-data.service';
+import { LoggingConfig } from '../../config/logging-config';
 import { CachingService } from '../CachingService/caching.service';
 
 export interface LocationData {
@@ -31,7 +32,11 @@ export class ApiService {
     // Check cache first
     const cachedData = this.cachingService.getWeatherData(targetLocation);
     if (cachedData) {
-      // console.log(`Using cached weather data for ${targetLocation}`);
+      if (LoggingConfig.apiLogging)
+      {
+        console.log(`Using cached weather data for ${targetLocation}`);
+      }
+
       return new Observable<WeatherData>(observer => {
         observer.next(cachedData);
         observer.complete();
@@ -66,7 +71,11 @@ export class ApiService {
     // Check cache first
     const cachedLocations = this.cachingService.getLocationsData();
     if (cachedLocations) {
-      console.log("Using cached locations data");
+      if (LoggingConfig.apiLogging)
+      { 
+        console.log("Using cached locations data");
+      }
+
       return new Observable<LocationData[]>(observer => {
         observer.next(cachedLocations);
         observer.complete();
@@ -77,7 +86,11 @@ export class ApiService {
     return this.http.get<LocationData[]>(`${this.baseUrl}/api/locations`).pipe(
       tap(locations => {
         this.cachingService.setLocationsData(locations);
-        console.log(`Cached ${locations.length} locations`);
+        
+        if (LoggingConfig.apiLogging)
+        {
+          console.log(`Cached ${locations.length} locations`);
+        }
       })
     );
   }
@@ -95,7 +108,11 @@ export class ApiService {
     // Check cache first
     const cachedHistory = this.cachingService.getHistoryData(stationId);
     if (cachedHistory) {
-      console.log(`Using cached history for station ${stationId} (${cachedHistory.length} records)`);
+      if (LoggingConfig.apiLogging)
+      {
+        console.log(`Using cached history for station ${stationId} (${cachedHistory.length} records)`);
+      }
+
       return new Observable<WeatherData[]>(observer => {
         observer.next(cachedHistory);
         observer.complete();
@@ -109,8 +126,40 @@ export class ApiService {
         }),
         tap(processedData => {
           this.cachingService.setHistoryData(stationId, processedData);
-          console.log(`Cached ${processedData.length} history records for station ${stationId}`);
+
+          if (LoggingConfig.apiLogging)
+          {
+            console.log(`Cached ${processedData.length} history records for station ${stationId}`);
+          }
         })
       );
+  }
+
+  /* ============================================================================================ */
+  getAllStationsWithWeather(): Observable<StationData[]> {
+    const cachedStations = this.cachingService.getStationsData();
+    if (cachedStations) {
+      if (LoggingConfig.apiLogging)
+      {
+        console.log("Using cached stations weather data");
+      }
+
+      return new Observable<StationData[]>(observer => {
+        observer.next(cachedStations);
+        observer.complete();
+      });
+    }
+
+    return this.http.get<StationData[]>(`${this.baseUrl}/api/stationsWithWeather`).pipe(
+      map(stations => stations.map(station => this.meteoService.processWeatherData(station))),
+      tap(stations => {
+        this.cachingService.setStationsData(stations);
+
+        if (LoggingConfig.apiLogging)
+        {
+          console.log(`Cached weather data for ${stations.length} stations`);
+        }
+      })
+    );
   }
 }

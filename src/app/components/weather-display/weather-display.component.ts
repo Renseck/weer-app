@@ -12,6 +12,7 @@ import { FloatingNotificationComponent } from '../floating-notification/floating
 import { FooterComponent } from '../footer/footer.component';
 import { ApiService } from '../../services/APIConnection/api.service';
 import { ModalService } from '../../services/ModalService/modal.service';
+import { WeatherMapComponent } from '../weather-map/weather-map.component'; 
 
 registerLocaleData(localeNl);
 
@@ -27,7 +28,8 @@ registerLocaleData(localeNl);
     RainIconComponent,
     SunIconComponent,
     WindCompassIconComponent,
-    FooterComponent
+    FooterComponent,
+    WeatherMapComponent
   ],
   templateUrl: './weather-display.component.html',
   styleUrl: './weather-display.component.css'

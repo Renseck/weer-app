@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface WeatherData {
+export interface StationData {
   stationId: number;
   stationName: string;
   temperature: number;
@@ -16,6 +16,9 @@ export interface WeatherData {
   timestamp: string;
   lat: number;
   lon: number;
+}
+
+export interface WeatherData extends StationData {
   locationName?: string;
   locationLatitude: number;
   locationLongitude: number;

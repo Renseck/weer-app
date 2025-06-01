@@ -57,6 +57,11 @@
     </div>
   </div>
 
+  <div class="weather-map-section" *ngIf="!isLoading">
+    <h2 class="map-header">Weerkaart Nederland</h2>
+    <app-weather-map></app-weather-map>
+  </div>
+
   <app-footer
     [timestamp]="timestamp"
     [stationName]="stationName"

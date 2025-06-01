@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WeatherData } from '../WeatherDataJson/weather-data.service';
+import { StationData, WeatherData } from '../WeatherDataJson/weather-data.service';
 import { LocationData } from '../APIConnection/api.service';
 
 interface CacheEntry<T> {
@@ -18,14 +18,16 @@ export class CachingService {
   private readonly LOCATIONS_PREFIX = 'locations_';
   private readonly WEATHER_PREFIX = 'weather_';
   private readonly HISTORY_PREFIX = 'history_';
+  private readonly STATIONS_PREFIX = 'stations_';
 
-  private defaultCacheDuration: number = 10 * 6 * 1000; // Standard is 10 minutes
+  private defaultCacheDuration: number = 10 * 60 * 1000; // Standard is 10 minutes
 
   // Type-specific durations
   private cacheConfigs: Record<string, CacheConfig> = {
     'locations': { duration: 60 * 60 * 1000 },
     'weather': { duration: this.defaultCacheDuration},
-    'history': { duration: this.defaultCacheDuration}
+    'history': { duration: this.defaultCacheDuration},
+    'stations': { duration: this.defaultCacheDuration}
   };
 
   private cache: Map<string, CacheEntry<any>> = new Map();
@@ -149,6 +151,25 @@ export class CachingService {
         if (key.startsWith(this.HISTORY_PREFIX)) {
           this.cache.delete(key);
         }
+      }
+    }
+  }
+
+  /* ================================== Stations cache methods ================================== */
+  setStationsData(data: any[]) : void {
+    const key = `${this.STATIONS_PREFIX}all`;
+    this.set(key, data, 'stations');
+  }
+
+  getStationsData(): StationData[] | null {
+    const key = `${this.STATIONS_PREFIX}all`;
+    return this.get<StationData[]>(key, 'stations');
+  }
+
+  clearStationsData(): void {
+    for (const key of this.cache.keys()) {
+      if (key.startsWith(this.STATIONS_PREFIX)) {
+        this.cache.delete(key);
       }
     }
   }
