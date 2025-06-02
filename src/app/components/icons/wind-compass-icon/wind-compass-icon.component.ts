@@ -42,6 +42,10 @@ export class WindCompassIconComponent implements OnChanges {
     return Math.round(this.windSpeed * 0.539957);
   }
 
+  get windSpeedKph(): number {
+    return Math.round(this.windSpeed * 3.6);
+  }
+
   /* ============================================================================================ */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["windDirectionDegrees"]) {

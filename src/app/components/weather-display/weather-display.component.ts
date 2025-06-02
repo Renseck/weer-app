@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import localeNl from '@angular/common/locales/nl';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { ActualTempIconComponent } from '../icons/actual-temp-icon/actual-temp-icon.component';
@@ -32,7 +33,30 @@ registerLocaleData(localeNl);
     WeatherMapComponent
   ],
   templateUrl: './weather-display.component.html',
-  styleUrl: './weather-display.component.css'
+  styleUrl: './weather-display.component.css',
+  animations: [
+    trigger('slideToggle', [
+      state('closed', style({
+        height: '0',
+        overflow: 'hidden',
+        opacity: '0'
+      })),
+      state('open', style({
+        height: '*',
+        opacity: '1'
+      })),
+      transition('closed <=> open', animate('300ms ease-in-out'))
+    ]),
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-out', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class WeatherComponent implements OnInit {
   stationId: number = 0;
@@ -56,6 +80,7 @@ export class WeatherComponent implements OnInit {
   errorMessage: string | null = null;
   searchTerm: string = 'Arnhem';
   displayedCity: string = '';
+  showMap: boolean = false;
 
   private isFromSuggestion: boolean = false;
   public pullTabWiggle: boolean = false;
@@ -167,5 +192,10 @@ export class WeatherComponent implements OnInit {
   /* ============================================================================================ */
   showHistoryModal(): void {
     this.modalService.openHistoryModal(this.stationId, this.stationName);
+  }
+
+  /* ============================================================================================ */
+  toggleMap() {
+    this.showMap = !this.showMap;
   }
 }

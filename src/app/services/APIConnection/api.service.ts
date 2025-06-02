@@ -46,7 +46,6 @@ export class ApiService {
     // Poll API otherwise
     return this.http.get<any>(`${this.baseUrl}/api/nearest?location=${targetLocation}`)
             .pipe(
-              tap(rawData => console.log('Raw API wind speed:', rawData.windSpeed)),
               map(data => this.meteoService.processWeatherData(data)),
               tap(processedData => {
                 this.cachingService.setWeatherData(targetLocation, processedData);

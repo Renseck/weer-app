@@ -55,11 +55,35 @@
       </span>
       <span class="tab-text">Bekijk weergeschiedenis</span>
     </div>
-  </div>
 
-  <div class="weather-map-section" *ngIf="!isLoading">
-    <h2 class="map-header">Weerkaart Nederland</h2>
-    <app-weather-map></app-weather-map>
+    <div class="map-pull-tab" *ngIf="!isLoading" (click)="toggleMap()">
+      <span class="tab-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+          <line x1="9" y1="3" x2="9" y2="18"></line>
+          <line x1="15" y1="6" x2="15" y2="21"></line>
+        </svg>
+      </span>
+      <span class="tab-text">Weerkaart tonen</span>
+    </div>
+
+    <div class="map-overlay" *ngIf="showMap" [@fadeInOut]>
+      <div class="map-overlay-content">
+        <div class="map-header-bar">
+          <h2 class="map-header">Weerkaart Nederland</h2>
+          <button class="close-map-button" (click)="toggleMap()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <app-weather-map 
+          [locationLat]="locationLat" 
+          [locationLon]="locationLon">
+        </app-weather-map>
+      </div>
+    </div>
   </div>
 
   <app-footer

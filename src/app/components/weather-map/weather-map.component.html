@@ -8,5 +8,17 @@
         {{ errorMessage }}
     </div>
 
+    <div class="data-type-controls">
+        <button
+            [class.active]="selectedDataType === weatherDataTypes.Temperature"
+            (click)="switchDataType(weatherDataTypes.Temperature)">
+            Temperatuur
+        </button>
+        <button
+            [class.active]="selectedDataType === weatherDataTypes.Rainfall"
+            (click)="switchDataType(weatherDataTypes.Rainfall)">
+            Neerslag
+        </button>
+    </div>
     <div id="temperature-map"></div>
 </div>
