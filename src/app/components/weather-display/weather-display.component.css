@@ -133,6 +133,10 @@
   animation: wiggle 0.7s ease;
 }
 
+.map-pull-tab.wiggle {
+  animation: anti-wiggle 0.7s ease;
+}
+
 
 @keyframes wiggle {
   0% { transform: translateY(-50%) rotate(0deg); }
@@ -141,6 +145,16 @@
   45% { transform: translateY(-50%) rotate(-6deg); }
   60% { transform: translateY(-50%) rotate(4deg); }
   75% { transform: translateY(-50%) rotate(-2deg); }
+  100% { transform: translateY(-50%) rotate(0deg); }
+}
+
+@keyframes anti-wiggle {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  15% { transform: translateY(-50%) rotate(10deg); }
+  30% { transform: translateY(-50%) rotate(-8deg); }
+  45% { transform: translateY(-50%) rotate(6deg); }
+  60% { transform: translateY(-50%) rotate(-4deg); }
+  75% { transform: translateY(-50%) rotate(2deg); }
   100% { transform: translateY(-50%) rotate(0deg); }
 }
 

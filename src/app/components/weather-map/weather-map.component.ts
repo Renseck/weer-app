@@ -52,14 +52,11 @@ export class WeatherMapComponent implements OnInit, AfterViewInit, OnDestroy{
       // Dynamically import Leaflet
       import('leaflet').then(leaflet => {
         L = leaflet;
-        // Import heat plugin after Leaflet is loaded
-        import('leaflet.heat').then(() => {
-          // Now it's safe to add CSS
-          const linkElement = document.createElement('link');
-          linkElement.rel = 'stylesheet';
-          linkElement.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; // Latest as of 30/05/2025
-          document.head.appendChild(linkElement);
-        });
+        // Now it's safe to add CSS
+        const linkElement = document.createElement('link');
+        linkElement.rel = 'stylesheet';
+        linkElement.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; // Latest as of 30/05/2025
+        document.head.appendChild(linkElement);
       });
     }
   }
@@ -152,7 +149,11 @@ export class WeatherMapComponent implements OnInit, AfterViewInit, OnDestroy{
     
     this.apiService.getAllStationsWithWeather().subscribe({
       next: (stations) => {
-        this.renderTemperatureMap(stations);
+        stations.forEach(station => {
+          station.windSpeedKph = station.windSpeed * 3.6;
+        });
+
+        this.renderDataMap(stations);
         this.isLoading = false;
       },
       error: (err) => {
@@ -164,7 +165,7 @@ export class WeatherMapComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   /* ============================================================================================ */
-  private renderTemperatureMap(stations: StationData[]): void {
+  private renderDataMap(stations: StationData[]): void {
     if (!this.isBrowser || !this.map) return;
 
     // Clear existing layers
@@ -187,6 +188,33 @@ export class WeatherMapComponent implements OnInit, AfterViewInit, OnDestroy{
         values = stations.map(s => s.rainfallLastHour);
         minValue = 0; // Rain starts at 0
         maxValue = Math.max(5, Math.ceil(Math.max(...values))); // At least 5mm scale
+        break;
+
+      case WeatherDataType.Humidity:
+        dataProperty = 'humidity';
+        dataUnit = '%';
+        popupLabel = 'Luchtvochtigheid';
+        values = stations.map(s => s.humidity);
+        minValue = Math.max(0, Math.floor(Math.min(...values))); // Min 0%
+        maxValue = Math.max(100, Math.ceil(Math.max(...values))); // Max 100%
+        break;
+
+      case WeatherDataType.SunPower:
+        dataProperty = 'sunPower';
+        dataUnit = 'W/m²';
+        popupLabel = 'Zonnekracht';
+        values = stations.map(s => s.sunPower);
+        minValue = 0; // Min at 0 W/m²
+        maxValue = Math.max(500, Math.ceil(Math.max(...values))); // At least 500
+        break;
+      
+      case WeatherDataType.WindSpeed:
+        dataProperty = 'windSpeedKph';
+        dataUnit = 'km/h';
+        popupLabel = 'Windsnelheid';
+        values = stations.map(s => s.windSpeedKph);
+        minValue = 0; // Min at 0 km/h
+        maxValue = Math.max(40, Math.ceil(Math.max(...values))); // At least 40km/h
         break;
 
       case WeatherDataType.Temperature:
@@ -243,7 +271,7 @@ export class WeatherMapComponent implements OnInit, AfterViewInit, OnDestroy{
       
       marker.bindPopup(`
         <strong>${station.stationName}</strong><br>
-        Temperatuur: ${(station[dataProperty as keyof StationData] as number).toFixed(1)}°C
+        ${popupLabel}: ${(station[dataProperty as keyof StationData] as number).toFixed(1)}${dataUnit}
       `);
       
       this.stationsLayer.addLayer(marker);
@@ -303,6 +331,39 @@ export class WeatherMapComponent implements OnInit, AfterViewInit, OnDestroy{
         }
         break;
 
+      case WeatherDataType.Humidity:
+        gradient = {
+          0.0: '#ffffff', // Low humidity (white)
+          0.2: '#deebf7', // Very light blue
+          0.4: '#9ecae1', // Light blue
+          0.6: '#4292c6', // Medium blue
+          0.8: '#2171b5', // Deep blue
+          1.0: '#084594'  // Very deep blue
+        };
+        break;
+
+      case WeatherDataType.SunPower:
+        gradient = {
+          0.0: '#ffffcc', // Low sun power (very light yellow)
+          0.2: '#ffeda0', // Light yellow
+          0.4: '#fed976', // Yellow
+          0.6: '#feb24c', // Light orange
+          0.8: '#fd8d3c', // Orange
+          1.0: '#bd0026'  // Deep red
+        };
+        break;
+
+      case WeatherDataType.WindSpeed:
+        gradient = {
+          0.0: '#f7fcfd', // Low wind (almost white)
+          0.2: '#e0ecf4', // Very light blue-green
+          0.4: '#bfd3e6', // Light blue-purple
+          0.6: '#9ebcda', // Medium blue-purple
+          0.8: '#8c96c6', // Blue-purple
+          1.0: '#6e016b'  // Deep purple
+        };
+        break;
+
       case WeatherDataType.Temperature:
       default:
         gradient = {
@@ -348,6 +409,21 @@ export class WeatherMapComponent implements OnInit, AfterViewInit, OnDestroy{
       case WeatherDataType.Rainfall:
         title = 'Neerslag (mm)';
         gradientColors = 'linear-gradient(to right, #ffffff, #c6dbef, #9ecae1, #6baed6, #3182bd, #08519c)'
+        break;
+
+      case WeatherDataType.Humidity:
+        title = 'Luchtvochtigheid (%)';
+        gradientColors = 'linear-gradient(to right, #ffffff, #deebf7, #9ecae1, #4292c6, #2171b5, #084594)';
+        break;
+
+      case WeatherDataType.SunPower:
+        title = 'Zonnekracht (W/m²)';
+        gradientColors = 'linear-gradient(to right, #ffffcc, #ffeda0, #fed976, #feb24c, #fd8d3c, #bd0026)';
+        break;
+
+      case WeatherDataType.WindSpeed:
+        title = 'Windsnelheid (km/h)';
+        gradientColors = 'linear-gradient(to right, #f7fcfd, #e0ecf4, #bfd3e6, #9ebcda, #8c96c6, #6e016b)';
         break;
 
       case WeatherDataType.Temperature:

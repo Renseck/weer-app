@@ -56,7 +56,7 @@
       <span class="tab-text">Bekijk weergeschiedenis</span>
     </div>
 
-    <div class="map-pull-tab" *ngIf="!isLoading" (click)="toggleMap()">
+    <div class="map-pull-tab" [class.wiggle]="pullTabWiggle" *ngIf="!isLoading" (click)="toggleMap()">
       <span class="tab-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>

@@ -11,7 +11,8 @@ export interface StationData {
   groundTemperature: number;
   sunPower: number;
   rainfallLastHour: number;
-  windSpeed: number;
+  windSpeed: number; // in m/s
+  windSpeedKph: number; // in km/h
   windDirectionDegrees: number;
   timestamp: string;
   lat: number;

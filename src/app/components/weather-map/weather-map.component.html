@@ -9,15 +9,62 @@
     </div>
 
     <div class="data-type-controls">
+        <!-- Temperature -->
         <button
             [class.active]="selectedDataType === weatherDataTypes.Temperature"
-            (click)="switchDataType(weatherDataTypes.Temperature)">
-            Temperatuur
+            (click)="switchDataType(weatherDataTypes.Temperature)"
+            title="Temperatuur">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                <circle cx="11.5" cy="16.5" r="1.5" />
+            </svg>
         </button>
+        <!-- Rainfall -->
         <button
             [class.active]="selectedDataType === weatherDataTypes.Rainfall"
-            (click)="switchDataType(weatherDataTypes.Rainfall)">
-            Neerslag
+            (click)="switchDataType(weatherDataTypes.Rainfall)"
+            title="Neerslag">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 13v8" />
+                <path d="M8 13v8" />
+                <path d="M12 15v6" />
+                <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25" />
+            </svg>
+        </button>
+        <!-- Humidity -->
+         <button
+            [class.active]="selectedDataType === weatherDataTypes.Humidity"
+            (click)="switchDataType(weatherDataTypes.Humidity)"
+            title="Luchtvochtigheid">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+            </svg>
+        </button>
+        <!-- Sun Power -->
+         <button
+            [class.active]="selectedDataType === weatherDataTypes.SunPower"
+            (click)="switchDataType(weatherDataTypes.SunPower)"
+            title="Zonnekract">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+        </button>
+        <!-- Wind Speed -->
+         <button
+            [class.active]="selectedDataType === weatherDataTypes.WindSpeed"
+            (click)="switchDataType(weatherDataTypes.WindSpeed)"
+            title="Windsnelheid">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" />
+            </svg>
         </button>
     </div>
     <div id="temperature-map"></div>
