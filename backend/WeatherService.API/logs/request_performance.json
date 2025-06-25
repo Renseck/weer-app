@@ -2894,5 +2894,85 @@
     "StatusCode": 200,
     "ResponseTimeMs": 734,
     "IsSuccessful": true
+  },
+  {
+    "Timestamp": "2025-06-25T13:20:57.5518397Z",
+    "Method": "GET",
+    "Path": "/api/stationsWithWeather",
+    "StatusCode": 200,
+    "ResponseTimeMs": 275,
+    "IsSuccessful": true
+  },
+  {
+    "Timestamp": "2025-06-25T13:24:53.1845119Z",
+    "Method": "GET",
+    "Path": "/api/nearest",
+    "StatusCode": 200,
+    "ResponseTimeMs": 156,
+    "IsSuccessful": true
+  },
+  {
+    "Timestamp": "2025-06-25T13:26:10.3553499Z",
+    "Method": "GET",
+    "Path": "/api/history/6275",
+    "StatusCode": 200,
+    "ResponseTimeMs": 317,
+    "IsSuccessful": true
+  },
+  {
+    "Timestamp": "2025-06-25T14:00:38.3194257Z",
+    "Method": "GET",
+    "Path": "/api/performance/stats",
+    "StatusCode": 200,
+    "ResponseTimeMs": 223,
+    "IsSuccessful": true
+  },
+  {
+    "Timestamp": "2025-06-25T14:07:56.6658074Z",
+    "Method": "GET",
+    "Path": "/api/locations",
+    "StatusCode": 200,
+    "ResponseTimeMs": 185,
+    "IsSuccessful": true
+  },
+  {
+    "Timestamp": "2025-06-25T14:08:25.8055856Z",
+    "Method": "GET",
+    "Path": "/api/stations",
+    "StatusCode": 200,
+    "ResponseTimeMs": 89,
+    "IsSuccessful": true
+  },
+  {
+    "Timestamp": "2025-06-25T14:08:29.5880324Z",
+    "Method": "GET",
+    "Path": "/api/stations",
+    "StatusCode": 200,
+    "ResponseTimeMs": 47,
+    "IsSuccessful": true
+  },
+  {
+    "Timestamp": "2025-06-25T14:08:32.9838969Z",
+    "Method": "GET",
+    "Path": "/api/stationsWithWeather",
+    "StatusCode": 200,
+    "ResponseTimeMs": 44,
+    "IsSuccessful": true
+  },
+  {
+    "Timestamp": "2025-06-25T14:09:02.1740938Z",
+    "Method": "GET",
+    "Path": "/api/nearest",
+    "StatusCode": 200,
+    "ResponseTimeMs": 15,
+    "IsSuccessful": true
+  },
+  {
+    "Timestamp": "2025-06-25T14:09:19.0897476Z",
+    "Method": "GET",
+    "Path": "/api/stations",
+    "StatusCode": 200,
+    "ResponseTimeMs": 56,
+    "IsSuccessful": true
   }
 ]
