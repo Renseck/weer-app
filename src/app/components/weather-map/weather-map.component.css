@@ -62,7 +62,7 @@
   border-radius: 10px;
 }
 
-.temperature-legend .labels {
+.temperature-legend {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
