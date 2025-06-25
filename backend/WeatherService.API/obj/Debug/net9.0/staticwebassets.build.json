@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "MqriER/hs59pww8+kjFAooyUa/lbt/HHZFKMIeqKkRw=",
+  "Source": "WeatherService.API",
+  "BasePath": "_content/WeatherService.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

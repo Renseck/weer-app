@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch WeatherService",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/WeatherService/bin/Debug/net9.0/WeatherService.dll",
+            "cwd": "${workspaceFolder}/WeatherService",
+            "stopAtEntry": false,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Launch WeatherService.API",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/WeatherService.API/bin/Debug/net9.0/WeatherService.API.dll",
+            "cwd": "${workspaceFolder}/WeatherService.API",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch Both Services",
+            "configurations": ["Launch WeatherService", "Launch WeatherService.API"]
+        }
+    ]
+}
